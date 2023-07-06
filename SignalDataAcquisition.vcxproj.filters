@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{6443de21-87b5-436d-884d-b592d0efc8a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src">
+      <UniqueIdentifier>{73ddabee-0a5f-4d92-9953-ca62eb06c490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Src\ui">
+      <UniqueIdentifier>{867579d9-9cf0-4a21-870e-d41ecf985a7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\common">
+      <UniqueIdentifier>{17ecfc3f-8d45-44de-9bff-973908b99995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ui\component">
+      <UniqueIdentifier>{9d3a2ee6-9a82-42fa-b09a-35b9d80e5d7a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\main.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ui\mainwindow.cpp">
+      <Filter>Src\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\common\threadclasses.cpp">
+      <Filter>Src\common</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ui\component\TChartView.cpp">
+      <Filter>Src\ui\component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\common\CCreateDump.cpp">
+      <Filter>Src\common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="Src\ui\mainwindow.h">
+      <Filter>Src\ui</Filter>
+    </QtMoc>
+    <QtMoc Include="Src\common\threadclasses.h">
+      <Filter>Src\common</Filter>
+    </QtMoc>
+    <QtMoc Include="Src\ui\component\TChartView.h">
+      <Filter>Src\ui\component</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="Resources\res.qrc">
+      <Filter>Resources</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\easyusb_card_dll.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\common\CCreateDump.h">
+      <Filter>Src\common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="Src\ui\mainwindow.ui">
+      <Filter>Src\ui</Filter>
+    </QtUic>
+  </ItemGroup>
+</Project>

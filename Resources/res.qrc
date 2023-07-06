@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>icons/3.ico</file>
+        <file>icons/39.ico</file>
+        <file>icons/43.ico</file>
+        <file>icons/108.bmp</file>
+        <file>icons/124.bmp</file>
+        <file>icons/132.bmp</file>
+        <file>icons/414.bmp</file>
+        <file>icons/416.bmp</file>
+        <file>icons/418.bmp</file>
+        <file>icons/828.bmp</file>
+        <file>icons/dis3.ico</file>
+        <file>icons/f14.ico</file>
+        <file>icons/pause24.png</file>
+        <file>icons/play24.png</file>
+    </qresource>
+</RCC>

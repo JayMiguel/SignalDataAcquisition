@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>843</width>
+    <height>575</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QSplitter" name="splitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QToolBox" name="toolBox">
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="currentOption">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>160</width>
+          <height>479</height>
+         </rect>
+        </property>
+        <attribute name="label">
+         <string>基本功能</string>
+        </attribute>
+        <widget class="QLineEdit" name="ad">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>40</y>
+           <width>71</width>
+           <height>21</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="comboDragMode">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>151</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <item>
+          <property name="text">
+           <string>查看波形方式</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>手动拖拽</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>框选矩形区域</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QComboBox" name="comboRubberBand">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>151</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <item>
+          <property name="text">
+           <string>矩形框模式</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>垂直放大</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>水平放大</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>矩形框放大</string>
+          </property>
+         </item>
+        </widget>
+        <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>168</width>
+           <height>28</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QPushButton" name="beginButton">
+            <property name="text">
+             <string>开始采集</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="beginButton_2">
+            <property name="text">
+             <string>停止采集</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QToolButton" name="Thread_Run">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>160</y>
+           <width>61</width>
+           <height>19</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>开始线程</string>
+         </property>
+        </widget>
+        <widget class="QToolButton" name="Thread_Quit">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>160</y>
+           <width>61</width>
+           <height>19</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>结束线程</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="finalBandwidth">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>160</width>
+          <height>479</height>
+         </rect>
+        </property>
+        <attribute name="label">
+         <string>待开发功能页</string>
+        </attribute>
+        <widget class="QPushButton" name="pushButton">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>80</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="samplingRate">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>160</width>
+          <height>479</height>
+         </rect>
+        </property>
+        <attribute name="label">
+         <string>待开发功能页2</string>
+        </attribute>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>80</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string/>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string>电流[uA]</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+              <widget class="QToolButton" name="originaiButton">
+               <property name="text">
+                <string>原始</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="zoomButton">
+               <property name="text">
+                <string>放大</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="shrinkButton">
+               <property name="text">
+                <string>缩小</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="TChartView" name="chartView"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>电压[mV]</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QToolButton" name="originaiButton2">
+               <property name="text">
+                <string>原始</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="zoomButton2">
+               <property name="text">
+                <string>放大</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="shrinkButton2">
+               <property name="text">
+                <string>缩小</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="TChartView" name="chartView2"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <action name="actZoomReset">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/icons/414.bmp</normaloff>:/images/icons/414.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>原始大小</string>
+   </property>
+   <property name="toolTip">
+    <string>原始大小</string>
+   </property>
+  </action>
+  <action name="actZoomIn">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/icons/418.bmp</normaloff>:/images/icons/418.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>放大</string>
+   </property>
+   <property name="toolTip">
+    <string>放大</string>
+   </property>
+  </action>
+  <action name="actZoomcut">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/icons/416.bmp</normaloff>:/images/icons/416.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>缩小</string>
+   </property>
+   <property name="toolTip">
+    <string>缩小</string>
+   </property>
+  </action>
+  <action name="actZoomReset2">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/icons/414.bmp</normaloff>:/images/icons/414.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>电压图原始大小</string>
+   </property>
+  </action>
+  <action name="actZoomIn2">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/icons/418.bmp</normaloff>:/images/icons/418.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>电压图放大</string>
+   </property>
+  </action>
+  <action name="actZoomcut2">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/icons/416.bmp</normaloff>:/images/icons/416.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>电压图缩小</string>
+   </property>
+  </action>
+  <action name="actThread_Run">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/icons/play24.png</normaloff>:/images/icons/play24.png</iconset>
+   </property>
+   <property name="text">
+    <string>启动线程</string>
+   </property>
+   <property name="toolTip">
+    <string>启动线程运行</string>
+   </property>
+  </action>
+  <action name="actThread_Quit">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/icons/pause24.png</normaloff>:/images/icons/pause24.png</iconset>
+   </property>
+   <property name="text">
+    <string>结束线程</string>
+   </property>
+   <property name="toolTip">
+    <string>结束线程运行</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TChartView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">tchartview.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
+ <connections/>
+</ui>
