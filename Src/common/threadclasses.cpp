@@ -1,6 +1,7 @@
 ﻿#include "threadclasses.h"
 #include <QDebug>
-
+#include <QtCharts>
+#include <QtCharts/QSplineSeries>
 
 QList<float*> g_bufList; // 缓冲区列表
 QList<std::vector<float>> Voltage_Queue;
@@ -97,6 +98,53 @@ void TProcessThread::run()
 }
 
 void TProcessThread::stopThread()
+{
+    m_stop = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+TUpdateThread::TUpdateThread(QObject* parent) : QThread(parent), m_stop(false), m_update(false)
+{
+
+}
+
+void TUpdateThread::run()
+{
+    int pointCout = BUF_SIZE;
+    while (!m_stop)
+    {
+        if (!m_update || Voltage_Queue.isEmpty() || Current_Queue.isEmpty())
+        {
+            QThread::msleep(100);
+            continue;
+        }
+        const std::vector<float>& Voltage_Data = Voltage_Queue.takeFirst();
+        const std::vector<float>& Current_Data = Current_Queue.takeFirst();
+
+        QSplineSeries* lineSeries1 = new QSplineSeries;
+        QSplineSeries* lineSeries2 = new QSplineSeries;
+
+        static float sampleRate = 10000;
+        for (int i = 0; i < pointCout / 2; i++) {
+            float num = (i + 1) / sampleRate;
+            QString formattedNum = QString::number(num, 'f', 5);
+
+            double doubleValue = formattedNum.toDouble();
+            lineSeries1->append(doubleValue, Voltage_Data.at(i));
+            lineSeries2->append(doubleValue, Current_Data.at(i));
+        }
+
+        emit updateChart(lineSeries1, lineSeries2);
+    }
+}
+
+void TUpdateThread::onUpdateFinished()
+{
+    m_update = true;
+}
+
+void TUpdateThread::stopThread()
 {
     m_stop = true;
 }

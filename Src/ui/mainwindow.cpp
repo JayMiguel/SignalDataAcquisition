@@ -41,9 +41,12 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     threadDAQ = new TDaqThread(this);        //数据采集线程
     threadShow = new TProcessThread(this);   //数据处理线程
+    threadUpdate = new TUpdateThread(this);   //图表更新线程
 
     connect(threadDAQ, &TDaqThread::started, this, &MainWindow::do_threadA_started);
     connect(threadDAQ, &TDaqThread::finished, this, &MainWindow::do_threadA_finished);
+    connect(threadUpdate, &TUpdateThread::updateChart, this, &MainWindow::onUpdateChart);
+    connect(this, &MainWindow::updateFinished, threadUpdate, &TUpdateThread::onUpdateFinished);
 }
 
 MainWindow::~MainWindow()
@@ -66,36 +69,36 @@ void MainWindow::Chart_Init()
     chart1->addSeries(lineSeries1);
 
     // 声明并初始化X轴、Y轴
-    QValueAxis* axisX = new QValueAxis();
-    QValueAxis* axisY = new QValueAxis();
+    axisX1 = new QValueAxis();
+    axisY1 = new QValueAxis();
 
     // 设置坐标轴显示的范围
-    axisX->setMin(0);
-    axisX->setMax(MAX_X);
-    axisY->setMin(-MAX_Y);
-    axisY->setMax(MAX_Y);
+    axisX1->setMin(0);
+    axisX1->setMax(MAX_X);
+    axisY1->setMin(-MAX_Y);
+    axisY1->setMax(MAX_Y);
 
     // 设置坐标轴上的格点
-    axisX->setTickCount(10);
-    axisY->setTickCount(10);
+    axisX1->setTickCount(10);
+    axisY1->setTickCount(10);
 
     // 设置坐标轴显示的名称
     QFont font("Microsoft YaHei", 8, QFont::Normal);//微软雅黑。字体大小8
-    axisX->setTitleFont(font);
-    axisY->setTitleFont(font);
-    axisX->setTitleText("X-Test");
-    axisY->setTitleText("Y-Test");
+    axisX1->setTitleFont(font);
+    axisY1->setTitleFont(font);
+    axisX1->setTitleText("X-Test");
+    axisY1->setTitleText("Y-Test");
 
     // 设置网格不显示
-    axisY->setGridLineVisible(true);
+    axisY1->setGridLineVisible(true);
 
     // 图表添加坐标轴
-    chart1->addAxis(axisX, Qt::AlignBottom);
-    chart1->addAxis(axisY, Qt::AlignLeft);
+    chart1->addAxis(axisX1, Qt::AlignBottom);
+    chart1->addAxis(axisY1, Qt::AlignLeft);
 
     // 把曲线关联到坐标轴
-    lineSeries1->attachAxis(axisX);
-    lineSeries1->attachAxis(axisY);
+    lineSeries1->attachAxis(axisX1);
+    lineSeries1->attachAxis(axisY1);
 
     // 把图表添加到图表视图
     ui->chartView->setChart(chart1);
@@ -115,36 +118,36 @@ void MainWindow::Chart_Init2()
     chart2->addSeries(lineSeries2);
 
     // 初始化X轴和Y轴
-    QValueAxis* axisX = new QValueAxis();
-    QValueAxis* axisY = new QValueAxis();
+    axisX2 = new QValueAxis();
+    axisY2 = new QValueAxis();
 
     // 设置坐标轴显示的范围
-    axisX->setMin(0);
-    axisX->setMax(MAX_X);
-    axisY->setMin(-MAX_Y);
-    axisY->setMax(MAX_Y);
+    axisX2->setMin(0);
+    axisX2->setMax(MAX_X);
+    axisY2->setMin(-MAX_Y);
+    axisY2->setMax(MAX_Y);
 
     // 设置坐标轴上的格点
-    axisX->setTickCount(10);
-    axisY->setTickCount(10);
+    axisX2->setTickCount(10);
+    axisY2->setTickCount(10);
 
     // 设置坐标轴显示的名称
     QFont font("Microsoft YaHei", 8, QFont::Normal);//微软雅黑。字体大小8
-    axisX->setTitleFont(font);
-    axisY->setTitleFont(font);
-    axisX->setTitleText("时间");
-    axisY->setTitleText("电压");
+    axisX2->setTitleFont(font);
+    axisY2->setTitleFont(font);
+    axisX2->setTitleText("时间");
+    axisY2->setTitleText("电压");
 
     // 设置网格不显示
-    axisY->setGridLineVisible(true);
+    axisY2->setGridLineVisible(true);
 
     // 设置坐标轴的位置
-    chart2->addAxis(axisX, Qt::AlignBottom);
-    chart2->addAxis(axisY, Qt::AlignLeft);
+    chart2->addAxis(axisX2, Qt::AlignBottom);
+    chart2->addAxis(axisY2, Qt::AlignLeft);
 
     // 把曲线关联到坐标轴
-    lineSeries2->attachAxis(axisX);
-    lineSeries2->attachAxis(axisY);
+    lineSeries2->attachAxis(axisX2);
+    lineSeries2->attachAxis(axisY2);
 
     // 把图表添加到图表视图
     ui->chartView2->setChart(chart2);
@@ -262,29 +265,27 @@ void MainWindow::do_threadA_finished()
     ui->actThread_Quit->setEnabled(false);
 }
 
-void MainWindow::updateChart()
+void MainWindow::onUpdateChart(QSplineSeries* lineSeries1, QSplineSeries* lineSeries2)
 {
-    int pointCout = BUF_SIZE;
-    while (!m_stop)
-    {
-        if (Voltage_Queue.isEmpty() || Current_Queue.isEmpty())
-        {
-            QThread::msleep(100);
-            continue;
-        }
-        const std::vector<float>& Voltage_Data = Voltage_Queue.takeFirst();
-        const std::vector<float>& Current_Data = Current_Queue.takeFirst();
+    chart1->removeAllSeries();
+    chart1->addSeries(lineSeries1);
+    lineSeries1->setName("随机数测试曲线");
 
-        static float sampleRate = 10000;
-        for (int i = 0; i < pointCout / 2; i++) {
-            float num = (i + 1) / sampleRate;
-            QString formattedNum = QString::number(num, 'f', 5);
+    // 把曲线关联到坐标轴
+    lineSeries1->attachAxis(axisX1);
+    lineSeries1->attachAxis(axisY1);
 
-            double doubleValue = formattedNum.toDouble();
-            lineSeries1->append(doubleValue, Voltage_Data.at(i));
-            lineSeries2->append(doubleValue, Current_Data.at(i));
-        }
-    }
+    ////////////////////////////////////////////////////////////
+
+    chart2->removeAllSeries();
+    chart2->addSeries(lineSeries2);
+    lineSeries2->setName("随机数测试曲线");
+
+    // 把曲线关联到坐标轴
+    lineSeries2->attachAxis(axisX2);
+    lineSeries2->attachAxis(axisY2);
+
+    emit updateFinished();
 }
 
 void MainWindow::on_actThread_Run_triggered()
@@ -292,9 +293,7 @@ void MainWindow::on_actThread_Run_triggered()
     //"启动线程"按钮
     threadShow->start();
     threadDAQ->start();
-    m_stop = false;
-    worker = QThread::create([&]() { this->updateChart(); });
-    worker->start();
+    threadUpdate->start();
 }
 
 void MainWindow::on_actThread_Quit_triggered()
@@ -302,5 +301,5 @@ void MainWindow::on_actThread_Quit_triggered()
     //"结束线程"按钮
     threadShow->stopThread();
     threadDAQ->stopThread();
-    m_stop = true;
+    threadUpdate->stopThread();
 }

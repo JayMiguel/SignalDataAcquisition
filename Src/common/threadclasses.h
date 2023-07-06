@@ -37,6 +37,24 @@ public:
     void    stopThread();   //结束线程run()函数的运行
 };
 
+class TUpdateThread : public QThread
+{
+    Q_OBJECT
+protected:
+    bool    m_stop;
+    bool    m_update;
+    void    run();          //线程的任务函数
+
+signals:
+    void updateChart(QSplineSeries*, QSplineSeries*);
+
+public slots:
+    void onUpdateFinished();
+
+public:
+    explicit TUpdateThread(QObject* parent = nullptr);
+    void    stopThread();   //结束线程run()函数的运行
+};
 
 #endif // MYTHREAD_H
 

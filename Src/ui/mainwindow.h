@@ -35,7 +35,13 @@ public:
     QTimer* timerDrawLine1;
     QTimer* timerDrawLine2;
     QChart* chart1;     //图表对象
+    QValueAxis* axisX1;
+    QValueAxis* axisY1;
+
     QChart* chart2;     //图表对象
+    QValueAxis* axisX2;
+    QValueAxis* axisY2;
+
     QSplineSeries* lineSeries1;
     QSplineSeries* lineSeries2;
     QTimer* timer;
@@ -46,12 +52,13 @@ public:
 private:
     TDaqThread* threadDAQ;    //数据采集线程
     TProcessThread* threadShow;   //数据处理线程
-    QThread* worker;    // 更新图表的线程
-    bool m_stop;
-    void updateChart();
+    TUpdateThread* threadUpdate;    // 更新图表的线程
 
 protected:
     void    closeEvent(QCloseEvent* event);
+
+signals:
+    void updateFinished();
 
 private slots:
     void Chart_Init();  //电流图表初始化
@@ -74,6 +81,7 @@ private slots:
     void on_actThread_Run_triggered();
     void on_actThread_Quit_triggered();
 
+    void onUpdateChart(QSplineSeries* lineSeries1, QSplineSeries* lineSeries2);
 
 private:
     Ui::MainWindow* ui;
